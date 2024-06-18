@@ -1,1 +1,1 @@
-{!! $campaign->htmlContent !!}
+{!! $htmlContent !!}

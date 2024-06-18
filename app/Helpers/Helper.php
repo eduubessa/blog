@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\NotificationRepository;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
 
@@ -89,4 +89,18 @@ function weekday($weekday_number): string
 function generateHexColor(): string
 {
     return sprintf('#%06x', mt_rand(0, 0xFFFFFF));
+}
+
+function htmlContentVariables(User $user,  string $htmlContent): string
+{
+    $variables = [
+        '%user.avatar%' => "<img src='https://scontent.flis5-3.fna.fbcdn.net/v/t39.30808-6/330955007_748169006497754_4123321557408362472_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEh3XKCUi0l6nybNGfom8O2i9G_AjCcZ4WL0b8CMJxnhYRJSzW_4bLvQEmUR7srfSSQKYWjX7YBnj_tYPTh_s44&_nc_ohc=dJxAxc1EC1gQ7kNvgHXeWYa&_nc_ht=scontent.flis5-3.fna&oh=00_AYCPJmAz8KGT9B_ua6JFWxWrICQ0VPf1BPCmvda1ZDnovQ&oe=6677E165' width='160' />",
+        '%user.firstname%' => $user->firstname
+    ];
+
+    foreach($variables as $key => $value) {
+        $htmlContent = str_replace($key, $value, $htmlContent);
+    }
+
+    return $htmlContent;
 }
