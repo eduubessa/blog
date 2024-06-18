@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Helpers\Interfaces;
+
+interface SettingInterface {
+
+    const APP_SETTING_SIGN_UP_STATUS_KEY = "[APP::SETTING::SIGN_UP::STATUS]";
+
+    const APP_SETTING_SIGN_UP_STATUS_ENABLED = "[APP::SETTING::SIGN_UP::STATUS::ENABLED]";
+    const APP_SETTING_SIGN_UP_STATUS_DISABLED = "[APP::SETTING::SIGN_UP::STATUS::DISABLED]";
+
+}
