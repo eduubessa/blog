@@ -32,7 +32,7 @@ class CampaignMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Campaign Mail Test',
+            subject: $this->campaign->subject,
         );
     }
 
@@ -41,6 +41,10 @@ class CampaignMail extends Mailable
      */
     public function content(): Content
     {
+
+        // Replace <[User.Name]> with the user's name in the email
+        $this->campaign->htmlContent = str_replace("[<User.Name>]!", $this->user->firstname, $this->campaign->htmlContent);
+
         return new Content(
             view: 'mails.campaign',
             with: [
