@@ -5,6 +5,7 @@ use App\Models\Campaign;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schedule;
 
 //Artisan::command('inspire', function () {
@@ -17,5 +18,7 @@ Schedule::call(function () {
     $user = User::findOrFail(1);
     $campaign = Campaign::findOrFail(2);
 
-    \Mail::to('GZS6a@example.com')->send(new CampaignMail(user: $user, campaign: $campaign));
+    echo "Sending email to {$user->email} with campaign {$campaign->name}";
+
+    Mail::to('GZS6a@example.com')->queue(new CampaignMail(user: $user, campaign: $campaign));
 })->everyMinute();

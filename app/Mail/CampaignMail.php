@@ -43,6 +43,10 @@ class CampaignMail extends Mailable
     {
         return new Content(
             view: 'mails.campaign',
+            with: [
+                'user' => $this->user,
+                'campaign' => $this->campaign
+            ]
         );
     }
 
