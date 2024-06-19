@@ -12,13 +12,4 @@ use Illuminate\Support\Facades\Schedule;
 //    $this->comment(Inspiring::quote());
 //})->purpose('Display an inspiring quote')->everyMinute();
 
-Schedule::command('app:import:campaigns')->everyMinute();
-
-Schedule::call(function () {
-    $user = User::findOrFail(1);
-    $campaign = Campaign::findOrFail(2);
-
-    echo "Sending email to {$user->email} with campaign {$campaign->name}";
-
-    Mail::to('GZS6a@example.com')->queue(new CampaignMail(user: $user, campaign: $campaign));
-})->everyMinute();
+Schedule::command('app:import:campaigns')->hourly();

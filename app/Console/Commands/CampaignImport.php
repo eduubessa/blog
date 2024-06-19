@@ -42,7 +42,7 @@ class CampaignImport extends Command
             foreach($service_campaigns as $service_campaign){
                 $campaign_per_code = Campaign::where('code', base64_encode($service_campaign["id"]));
 
-                if($campaign_per_code->count() <= 0){
+                if($campaign_per_code->count() <= 0 && !str_contains($service_campaign["name"], "| Created by CRM")){
                     try {
                         // Create campaign on local database
                         $campaign = new Campaign();

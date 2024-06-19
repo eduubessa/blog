@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use Brevo\Client\Api\AccountApi;
-use Brevo\Client\Api\EmailCampaignsApi;
-use Brevo\Client\Configuration;
+use App\Models\Mail;
 use GuzzleHttp\Client;
+use Brevo\Client\Configuration;
+use Brevo\Client\Api\AccountApi;
 use Illuminate\Support\Facades\Log;
-use PharIo\Manifest\Email;
+use Brevo\Client\Api\EmailCampaignsApi;
 
 class BrevoService
 {
@@ -63,5 +63,27 @@ class BrevoService
         }
 
         return 0;
+    }
+
+    public function createCampaignFromMail(Mail $mail): void
+    {
+        try {
+            $campaign = [
+                'name' => "{$mail->name} | Created by CRM",
+                'subject' => $mail->subject,
+                'htmlContent' => $mail->htmlContent,
+                'sender' => [
+                    'name' => config('app.name'),
+                    'email' => config('services.brevo.sender')
+                ]
+            ];
+
+            $this->api_instance = new EmailCampaignsApi(new Client(), $this->configuration);
+            $response = $this->api_instance->createEmailCampaign($campaign);
+
+            Log::info("BREVO API | CREATE CAMPAIGN ON SERVICE | SUCCESS: {$response}");
+        }catch(\Exception $exception){
+            Log::error("BREVO API | ERROR: {$exception->getMessage()}");
+        }
     }
 }

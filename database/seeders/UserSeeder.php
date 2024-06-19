@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -21,6 +22,8 @@ class UserSeeder extends Seeder
         $user->username = "eduardo.bessa";
         $user->email = "KuUeh@example.com";
         $user->mobile_phone = "3519139446525";
+        $user->gender = 'male';
+        $user->birth_date = now()->format('Y-m-d');
         $user->password = bcrypt('12345678');
         $user->save();
     }

@@ -37,6 +37,7 @@ return [
     'brevo' => [
         'key' => env(key: 'BREVO_KEY', default: ''),
         'url' => env(key: 'BREVO_URL', default: ''),
+        'sender' => env(key: 'BREVO_SENDER', default: ''),
     ],
     'postcodes' => [
         'key' => env('POSTCODES_KEY'),
