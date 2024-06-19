@@ -15,7 +15,7 @@ class CampaignImport extends Command
      *
      * @var string
      */
-    protected $signature = 'app:import:campaigns {--user=?}';
+    protected $signature = 'service:campaigns:import {--user=?}';
 
     /**
      * The console command description.

@@ -42,7 +42,7 @@ class CampaignMail extends Mailable
     public function content(): Content
     {
         // Replace <[User.Name]> with the user's name in the email
-        $html_content = htmlContentVariables($this->user, $this->campaign->htmlContent);
+        $html_content = htmlContentVariables(user: $this->user, htmlContent: $this->campaign->htmlContent);
 
         return new Content(
             view: 'mails.campaign',

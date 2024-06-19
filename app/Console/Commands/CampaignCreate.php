@@ -8,7 +8,7 @@ use App\Services\BrevoService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class CreateCampaignOnService extends Command
+class CampaignCreate extends Command
 {
     /**
      * The name and signature of the console command.
@@ -22,20 +22,17 @@ class CreateCampaignOnService extends Command
      *
      * @var string
      */
-    protected $description = 'Create campaign on external service';
+    protected $description = 'Imports campaigns from the database and creates them on an external service.';
 
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         //
         $this->service = new BrevoService();
 
         try {
-
-//            dd($this->service->createCampaignSender());
-
             $mails = Mail::where('status', MailInterface::STATUS_DRAFT)
                 ->orWhere('status', MailInterface::STATUS_ACTIVE);
 

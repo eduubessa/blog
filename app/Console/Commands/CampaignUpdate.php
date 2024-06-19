@@ -38,6 +38,8 @@ class CampaignUpdate extends Command
 
             foreach($campaigns_mail as $campaign_mail){
                 if(str_contains($campaign_mail["name"], "| Created by CRM")){
+
+
                     try {
                         $mail = Mail::where('name', $campaign_mail["name"])->first();
                         $mail->htmlContent = $campaign_mail["htmlContent"];

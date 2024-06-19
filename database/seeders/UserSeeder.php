@@ -26,5 +26,17 @@ class UserSeeder extends Seeder
         $user->birth_date = now()->format('Y-m-d');
         $user->password = bcrypt('12345678');
         $user->save();
+
+        $user = new User();
+        $user->avatar = "default.png";
+        $user->firstname = "Nuno";
+        $user->lastname = "Santos";
+        $user->username = "nuno.santos";
+        $user->email = "nuno.santos@gmail.com";
+        $user->mobile_phone = "3519139446225";
+        $user->gender = 'male';
+        $user->birth_date = now()->format('Y-m-d');
+        $user->password = bcrypt('12345678');
+        $user->save();
     }
 }
