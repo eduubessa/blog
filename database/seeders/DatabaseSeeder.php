@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
+            AvatarSeeder::class,
             UserSeeder::class,
-            MailSeeder::class
+            MailSeeder::class,
         ]);
     }
 }

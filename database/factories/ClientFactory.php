@@ -18,6 +18,16 @@ class ClientFactory extends Factory
     {
         return [
             //
+            'user_id' => 2,
+            'number_fiscal' => $this->faker->ean13(),
+            'phone_number' => $this->faker->phoneNumber(),
+            'mobile_number' => $this->faker->phoneNumber(),
+            'address_line_1' => $this->faker->address(),
+            'address_line_2' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'country' => $this->faker->country(),
+            'postcode' => $this->faker->postcode(),
         ];
     }
 }

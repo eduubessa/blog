@@ -1,0 +1,706 @@
+@import '_base.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    background: rgb(245,245,245);
+}
+
+div#app {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    grid-template-columns: 7% 93%;
+    grid-template-rows: 100%;
+    display: inline-grid;
+}
+
+aside#app-sidebar {
+    padding: 5px 10px;
+    margin: 0 0 0 0;
+    width: 100%;
+    min-height: 100vh;
+    background: rgb(255,255,255);
+}
+
+aside#app-sidebar > header#app-sidebar-header {
+    padding: 0;
+    margin: 0 0 2vh 0;
+}
+
+aside#app-sidebar > header#app-sidebar-header > div#app-brand {
+    text-align: center;
+}
+
+aside#app-sidebar > header#app-sidebar-header > div#app-brand img {
+    width: 90px;
+}
+
+aside#app-sidebar > nav#app-sidebar-nav {
+    padding: 0;
+    margin: 0;
+}
+
+aside#app-sidebar > nav#app-sidebar-nav > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+aside#app-sidebar > nav#app-sidebar-nav > ul > li {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+aside#app-sidebar > nav#app-sidebar-nav > ul > li.active {
+
+}
+
+aside#app-sidebar > nav#app-sidebar-nav > ul > li > a {
+    padding: 10px 0;
+    color: rgba(150,150,150);
+    text-decoration: none;
+    display: block;
+}
+
+aside#app-sidebar > nav#app-sidebar-nav > ul > li > a > p {
+    font-size: .8rem;
+    text-transform: uppercase;
+}
+
+main#app-main {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+main#app-main header#app-main-header {
+    color: rgb(150,150,150);
+    padding: 8px 12px;
+    grid-template-columns: 40% 30% 30%;
+    display: grid;
+}
+
+main#app-main > header#app-main-header > section#app-main-search {
+    padding: 16px 10px 8px 30px;
+    margin: 0;
+    width: 100%;
+}
+
+main#app-main > header#app-main-header > section#app-main-search > label {
+    position: relative;
+    top: 3px;
+}
+
+main#app-main > header#app-main-header > section#app-main-search > input {
+    padding-left: 8px;
+    width: 250px;
+    background: transparent;
+    border: 0;
+}
+
+main#app-main > header#app-main-header > section#app-main-search > input::placeholder {
+    color: rgb(150,150,150);
+}
+
+main#app-main > header#app-main-header > section#app-main-datetime {
+    padding: 16px 10px 8px 30px;
+}
+
+main#app-main > header#app-main-header > section#app-main-datetime label {
+    padding-right: 8px;
+    position: relative;
+    top: 3px;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged {
+    padding: 16px 10px 8px 30px;
+    grid-template-columns: 60% 10% 10%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-messages {
+    padding-right: 32px;
+    text-align: right;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-messages > button {
+    padding: 8px 22px;
+    background: rgb(255,255,255);
+    border: 0;
+    box-shadow: 0 1px 1px rgba(150,150,150);
+    border-radius: 4px;
+    font-size: .85rem;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-messages > button > label {
+    margin-right: 3px;
+    position: relative;
+    top: 3px;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-notifications {
+    margin-top: 3px;
+    position: relative;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-notifications > label {
+    padding-right: 8px;
+    position: relative;
+    cursor: pointer;
+    top: 3px;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-notifications > label > #new-notifications-alert {
+    display: none;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-notifications > label > div.app-main-logged-notifications-opened {
+    padding: 4px 8px;
+    background: rgba(9, 132, 227, .1);
+    border-radius: 50%;
+}
+
+div#app-main-logged-notifications-content {
+    padding: 0;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 30vw;
+    height: 460px;
+    background: white;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    z-index: 1000;
+}
+
+
+div#app-main-logged-notifications-content:after {
+    bottom: 100%;
+    left: 93%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 6px;
+    margin-left: -6px;
+}
+
+header#app-main-logged-notifications-content-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(213, 213, 213, 0.5);
+    border-top: 1px solid rgba(213, 213, 213, 0.65
+    );
+}
+
+header#app-main-logged-notifications-content-header h4 {
+    color: #000;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+nav#app-main-logged-notifications-content-list {
+    overflow-y: auto;
+    height: 360px;
+}
+
+nav#app-main-logged-notifications-content-list li {
+    padding: 14px 6px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid rgba(213, 213, 213, 0.5);;
+    line-height: 20px;
+    font-family: "Raleway", sans-serif;
+    font-size: 12px;
+    text-align: justify;
+    transition: all 0.4s ease;
+}
+
+nav#app-main-logged-notifications-content-list li:hover {
+    cursor: pointer;
+    background: rgba(116, 185, 255, .1);
+    transition: all 0.4s ease;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-notifications img.app-main-logged-notification-avatar {
+    margin-top: 5px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-avatar {
+    margin-top: 3px;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged > div#app-main-logged-avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+main#app-main > header#app-main-header > section#app-main-logged .app-main-logged-notification-datetime {
+    position: absolute;
+    bottom: -5px;
+}
+
+main#app-main > section#app-main-content {
+    margin-top: 50px;
+}
+
+main#app-main > section#app-main-content #page-title {
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+
+main#app-main > section#app-main-content div#app-main-home-numbers {
+    grid-gap: 20px;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+main#app-main > section#app-main-content div#app-main-home-numbers > section.app-main-home-card {
+    padding: 23px;
+    width: 100%;
+    box-shadow: 0 2px 2px rgb(150,150,150);
+    background: rgb(255,255,255);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+main#app-main > section#app-main-content div#app-main-home-numbers > section.app-main-home-card:hover {
+    cursor: pointer;
+    transform: scale(1);
+    box-shadow: 15px 15px 50px rgb(120,120,120);
+    transition: all 0.4s ease;
+}
+
+main#app-main > section#app-main-content div#app-main-home-charts {
+    grid-gap: 20px;
+    grid-template-columns: 45.78% 45.78%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+main#app-main > section#app-main-content div#app-main-home-charts > section.app-main-home-card {
+    padding: 23px;
+    width: 100%;
+    box-shadow: 0 2px 2px rgb(150,150,150);
+    background: rgb(255,255,255);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+
+main#app-main > section#app-main-content div#app-main-home-charts > section.app-main-home-card:hover {
+    position: relative;
+    cursor: pointer;
+    transform: scale(1);
+    box-shadow: 15px 15px 50px rgb(120,120,120);
+    transition: all 0.4s ease;
+    z-index: 100;
+}
+
+main#app-main > section#app-main-content div#app-main-home-more {
+    grid-gap: 20px;
+    grid-template-columns: 30% 61.75%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+main#app-main > section#app-main-content div#app-main-home-more > section.app-main-home-card {
+    padding: 23px;
+    width: 100%;
+    box-shadow: 0 2px 2px rgb(150,150,150);
+    background: rgb(255,255,255);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+main#app-main > section#app-main-content div#app-main-home-more > section.app-main-home-card:hover {
+    position: relative;
+    cursor: pointer;
+    transform: scale(1);
+    box-shadow: 15px 15px 50px rgb(120,120,120);
+    transition: all 0.4s ease;
+    z-index: 99;
+}
+
+main#app-main > section#app-main-content div > section.app-main-home-card h5 {
+    margin-bottom: 2px;
+    font-size: 1.15rem;
+    font-family: "PT Sans", sans-serif;
+    letter-spacing: 1px;
+}
+
+main#app-main > section#app-main-content div > section.app-main-home-card h5 i {
+    position: relative;
+    top: 2px;
+}
+
+main#app-main > section#app-main-content div > section.app-main-home-card small {
+    margin-bottom: 10px;
+}
+
+main#app-main > section#app-main-content #app-main-home-card-birthdays > div.row {
+    margin: 0 auto;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.1);
+    font-size: .85rem;
+}
+
+main#app-main > section#app-main-content #app-main-home-card-birthdays img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #666;
+}
+
+#tags-list ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#tags-list ul li {
+    padding: 4px 16px;
+    font-weight: 700;
+    font-size: .8rem;
+    border: 2px solid #19202E;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: background, color, 0.4s ease;
+}
+
+#tags-list ul li:hover {
+    color: #fff;
+    cursor: pointer;
+    padding: 4px 16px;
+    font-weight: 700;
+    font-size: .8rem;
+    border: 2px solid #19202E;
+    background: #19202E;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: background, color, 0.4s ease;
+}
+
+
+#tags-list ul li span {
+    position: relative;
+    top: 2px;
+    left: 4px;
+}
+
+.app-components-tags-add {
+    padding: 6px 8px;
+    color: #000;
+    background: #fff;
+    border: 1px solid #000;
+    opacity: .5;
+}
+
+.app-components-tags-add:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.app-components-tags-add input {
+    color: #333;
+    min-width: 5px;
+    font-size: .8rem;
+    width: auto;
+    height: 15px;
+    border: 0;
+}
+
+section#app-list-header {
+    padding: 24px 16px;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    border-radius: 12px;
+    grid-template-columns: 25% 45% 10% 20%;
+    grid-template-rows: auto;
+    display: grid;
+    text-align: center;
+}
+
+section#app-list-header > div {
+    text-align: center;
+}
+
+article.app-customer {
+    padding: 16px 16px;
+    margin: 20px 0;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    border-radius: 12px;
+    grid-template-columns: 7.5% 20% 45% 10% 20%;
+    grid-template-rows: auto;
+    align-items: center;
+    display: grid;
+}
+
+.app-customer-avatar {
+    width: 65px;
+    height: 64px;
+    border-radius: 8px
+}
+
+#app-list-nocustomers {
+    color: rgba(190,190,190,1);
+    padding: 20px 16px;
+    margin: 20px 0;
+    border-radius: 12px;
+    background: rgba(255,255,255,1);
+    text-align: center;
+    font-family: "Relaway", sans-serif;
+}
+
+
+#app-list-nocustomers a {
+    text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+#dayweek {
+    margin-top: 20px;
+    grid-gap: 1.5%;
+    grid-template-columns: 13% 13% 13% 13% 13% 13% 13%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+#times {
+    grid-gap: 1.5%;
+    grid-template-columns: 13% 13% 13% 13% 13% 13% 13%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+#timer-custom {
+    grid-gap: 1.5%;
+    grid-template-columns: 46.2% 46.2% 5%;
+    grid-template-rows: auto;
+    display: grid;
+}
+
+.form-group label {
+    padding: 10px 0;
+    display: block;
+}
+
+
+article.app-specialities {
+    padding: 16px 16px;
+    margin: 20px 0;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    border-radius: 12px;
+    grid-template-columns: 73% 10% 17%;
+    grid-template-rows: auto;
+    align-items: center;
+    display: grid;
+}
+
+#speciality-description {
+    height: 120px;
+    resize: none;
+}
+
+#customer-avatar-upload {
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 18px;
+    width: 183px;
+    height: 183px;
+    border: 1px dashed #333;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+}
+
+#customer-avatar-upload-input {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+    border-radius: 50%;
+}
+
+#customer-avatar-croppie {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.customer-avatar-edit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(50,50,50,0.75);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#customer-avatar-croppie:hover #customer-avatar-upload-edit {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+#customer-avatar-current {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+
+#customer-avatar-current > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: #fff;
+}
+
+#customer-avatar-current-edit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(50,50,50,0.75);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#customer-avatar-current:hover #customer-avatar-current-edit {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.cr-boundary {
+    border-radius: 50% !important;
+}
+
+#customer-avatar-current-edit > h6 {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.app-customer-new-tag {
+    border: 0;
+    background: transparent;
+}
+
+section#app-tasks-header {
+    padding: 24px 16px;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    border-radius: 12px;
+    grid-template-columns: 15% 55% 5% 23%;
+    grid-template-rows: auto;
+    display: grid;
+    text-align: center;
+}
+
+article.app-task {
+    padding: 16px 16px;
+    margin: 20px 0;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    border-radius: 12px;
+    grid-template-columns: 20% 50% 8% 23%;
+    grid-template-rows: auto;
+    align-items: center;
+    display: grid;
+    text-align: center;
+}
+
+section#tag-input {
+    position: relative;
+}
+
+nav#tags-suggestions {
+    margin-bottom: 20px;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    max-height: 220px;
+    box-shadow: 0 3px 3px #999;
+    overflow: auto;
+}
+
+nav#tags-suggestions ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav#tags-suggestions ul li {
+    cursor: pointer;
+    color: #19202E;
+    padding: 20px 18px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(150,150,150,.3);
+    transition: color, background-color 0.4s ease;
+}
+
+nav#tags-suggestions ul li:hover {
+    color: #fff;
+    background: #19202E;
+    transition: color, background-color 0.4s ease;
+}
+
+#automation-description {
+    resize: none;
+    height: 180px;
+}

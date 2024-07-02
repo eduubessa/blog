@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('htmlContent');
             $table->string('status')->default(MailInterface::STATUS_DRAFT);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

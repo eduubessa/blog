@@ -9,5 +9,13 @@
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.3",
+        "crypto-js": "^4.2.0",
+        "font-awesome": "^4.7.0",
+        "laravel-echo": "^1.16.1",
+        "pusher-js": "^8.4.0-rc2",
+        "remixicon": "^4.3.0"
     }
 }

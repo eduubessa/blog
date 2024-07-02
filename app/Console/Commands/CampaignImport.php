@@ -42,7 +42,9 @@ class CampaignImport extends Command
             foreach($service_campaigns as $service_campaign){
                 $campaign_per_code = Campaign::where('code', base64_encode($service_campaign["id"]));
 
-                if($campaign_per_code->count() <= 0 || !str_contains($service_campaign["name"], "| Created by CRM")){
+                if($campaign_per_code->count() <= 0 && !str_contains($service_campaign["name"], "Created by CRM")){
+                    echo "Importar a campanha: {$service_campaign["name"]}\n";
+                    echo str_contains($service_campaign["name"], "Created by CRM");
                     try {
                         // Create campaign on local database
                         $campaign = new Campaign();
@@ -55,7 +57,10 @@ class CampaignImport extends Command
                     }catch(\Exception $exception){
                         Log::warning("IMPORT CAMPAIGN | SERVICE ID: {$service_campaign["id"]} | ERROR: Not inserted on local database | Reason: {$exception->getMessage()}");
                     }
-                }else{
+
+                }else if($campaign_per_code->count() == 1 && !str_contains($service_campaign["name"], "Created by CRM")){
+                    echo "Atualizar a campanha: {$service_campaign["name"]}\n";
+                    echo str_contains($service_campaign["name"], "Created by CRM");
                     try {
                         // Update campaign on local database
                         $campaign = $campaign_per_code->first();
@@ -66,7 +71,7 @@ class CampaignImport extends Command
                         $campaign->save();
 
                     }catch(\Exception $exception){
-                        Log::warning("IMPORT CAMPAIGN | SERVICE ID: {$service_campaign["id"]} | ERROR: Not updated on local database | Reason: {$exception->getMessage()}");
+                        Log::warning("UPDATE CAMPAIGN | SERVICE ID: {$service_campaign["id"]} | ERROR: Not updated on local database | Reason: {$exception->getMessage()}");
                     }
                 }
             }

@@ -34,16 +34,13 @@ class CampaignUpdate extends Command
         $this->service  = new BrevoService();
 
         if($this->service->countCampaigns() > 0){
-            $campaigns_mail = $this->service->getAllCampaigns();
-
-            foreach($campaigns_mail as $campaign_mail){
+            foreach($this->service->getAllCampaigns() as $campaign_mail){
                 if(str_contains($campaign_mail["name"], "| Created by CRM")){
-
-
                     try {
-                        $mail = Mail::where('name', $campaign_mail["name"])->first();
-                        $mail->htmlContent = $campaign_mail["htmlContent"];
-                        $mail->save();
+                        // Create campaign on external service
+                        Mail::where('name',  str_replace(' | Created by CRM', '', $campaign_mail["name"]))->update([
+                            'htmlContent' => $campaign_mail["htmlContent"]
+                        ]);
                     }catch(\Exception $exception){
                         Log::warning("UPDATE CAMPAIGN | SERVICE ID: {$campaign_mail["name"]} | ERROR: Not updated on local database | Reason: {$exception->getMessage()}");
                     }

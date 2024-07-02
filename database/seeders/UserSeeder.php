@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Notifications\ActivationAccount as ActivationAccountNotification;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 class UserSeeder extends Seeder
 {
@@ -16,27 +18,57 @@ class UserSeeder extends Seeder
     {
         //
         $user = new User();
-        $user->avatar = "default.png";
-        $user->firstname = "Eduardo";
-        $user->lastname = "Bessa";
-        $user->username = "eduardo.bessa";
-        $user->email = "KuUeh@example.com";
-        $user->mobile_phone = "3519139446525";
-        $user->gender = 'male';
-        $user->birth_date = now()->format('Y-m-d');
-        $user->password = bcrypt('12345678');
+        $user->avatar_id = 1;
+        $user->firstname = encrypt_data("Webmaster");
+        $user->lastname = encrypt_data("master");
+        $user->username = "webmaster";
+        $user->email = "webmaster@localhost";
+        $user->mobile_phone = "9191919192";
+        $user->password = bcrypt("password");
         $user->save();
 
+        // Create activation account token
+        $user->activationAccount()->create([
+            'token' => Crypt::encrypt(uniqid())
+        ]);
+
+        //Send email to webmaster@localhost
+        $user->notify(new ActivationAccountNotification);
         $user = new User();
-        $user->avatar = "default.png";
-        $user->firstname = "Nuno";
-        $user->lastname = "Santos";
-        $user->username = "nuno.santos";
-        $user->email = "nuno.santos@gmail.com";
-        $user->mobile_phone = "3519139446225";
-        $user->gender = 'male';
-        $user->birth_date = now()->format('Y-m-d');
-        $user->password = bcrypt('12345678');
+        $user->avatar_id = 1;
+        $user->firstname = encrypt_data("Administrador");
+        $user->lastname = encrypt_data("admin");
+        $user->username = "administrador";
+        $user->email = "admin@localhost";
+        $user->mobile_phone = "9191919191";
+        $user->password = bcrypt("password");
         $user->save();
+
+        // Create activation account token
+        $user->activationAccount()->create([
+            'token' => Crypt::encrypt(uniqid())
+        ]);
+
+        $user->notify(new ActivationAccountNotification);
+
+        //
+        if(env('APP_DEBUG')) {
+            $user = new User();
+            $user->avatar_id = 1;
+            $user->firstname = encrypt_data("Eduardo");
+            $user->lastname = encrypt_data("Bessa");
+            $user->username = "eduardo.bessa";
+            $user->email = "eduardo.bessa@localhost";
+            $user->mobile_phone = "913946525";
+            $user->password = bcrypt("password");
+            $user->save();
+
+            // Create activation account token
+            $user->activationAccount()->create([
+                'token' => Crypt::encrypt(uniqid())
+            ]);
+
+            $user->notify(new ActivationAccountNotification);
+        }
     }
 }
