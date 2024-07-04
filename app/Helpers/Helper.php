@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
@@ -51,13 +52,14 @@ function date_format_trans(string $date, bool $with_week = false): string
 
 function notifications($type = "list"): int|array|Collection
 {
-    $notificationRepository = new NotificationRepository();
+    $notifications = Notification::where('read_at', null);
+
 
     switch($type) {
-        case "counter": return $notificationRepository->getNotificationsGlobalNotRead()->count();
-        case "list": return $notificationRepository->getNotificationsGlobalNotRead()->toArray();
+        case "counter": return $notifications->count();
+        case "list": return $notifications->get()->toArray();
         case "collection":
-        default: return $notificationRepository->getNotificationsGlobalNotRead()->get();
+        default: return $notifications->get();
     }
 }
 

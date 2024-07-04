@@ -17,7 +17,7 @@
                         <small>Total de clientes registados</small>
                     </div>
                     <div class="row mt-2">
-                        <h1>{{ $customers }}</h1>
+                        <h1>{{ $clients }}</h1>
                     </div>
                 </section>
                 <section class="app-main-home-card">

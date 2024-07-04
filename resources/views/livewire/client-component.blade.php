@@ -1,51 +1,72 @@
-<div x-data="customers">
-    <div class="row mt-3">
-        <div class="col-md-9">
-            <h6 class="mt-2">Informações do cliente</h6>
+<div>
+    <div class="row mb-4">
+        <div class="col-md-5 offset-2">
+            <h1 class="mt-3 mb-3">Clientes</h1>
         </div>
-        <div class="col-md-3">
-            @if(!is_null($client))
-                <button form="customer-save" type="submit" class="btn btn-filter btn-small pull-right">Guardar</button>
-            @endif
+        <div class="col-md-3 text-right pt-3">
+            <a class="btn btn-filter inverter" href="{{ route('clients.create') }}">Adicionar Cliente</a>
+            <button class="btn btn-filter" wire:click="$set('modal', true)">Importar</button>
         </div>
     </div>
-    <hr />
-    <div class="form-group">
-        <label for="customer-username">Nome</label>
-        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-name" name="name" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ decrypt_data($client->user->firstname) }}" @endif />
-    </div>
-    <div class="form-group">
-        <label for="customer-email">E-mail</label>
-        <input class="form-control" type="email" placeholder="E-mail" id="customer-email" name="email" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ decrypt_data($client->email) }}" @endif />
-    </div>
-    <div class="form-group">
-        <label for="customer-username">Data de nascimento</label>
-        <input class="form-control" type="date" id="customer-birthday" name="birthday" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ $client->birthday }}" @endif />
-    </div>
-    <div class="form-group">
-        <label for="customer-username">Morada</label>
-        <input class="form-control" tcype="text" placeholder="Rua, Avenida" id="customer-address-line-1" name="address-line-1" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ decrypt_data($client->address_line_1) }}" @endif />
-    </div>
-    <div class="form-group">
-        <label for="customer-username">Porta, Andar, Letra</label>
-        <input class="form-control" type="text" placeholder="Porta, Andar, Letra" id="customer-address-line-2" name="address-line-2" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ decrypt_data($client->address_line_2) }}" @endif  />
+    @if(session()->has('its.message.body'))
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="alert text-center @if(session('message.type') == 'warning') alert-warning @elseif('its.message.type' == 'danger') alert-danger @else alert-success @endif">{{ session('its.message.body') }}</div>
+            </div>
+        </div>
+    @endif
+    <div class="row mb-3">
+        <div class="col-md-8 offset-2">
+            <div class="row">
+                <div class="col-md-10">
+                </div>
+                <div class="col-md-2 text-right pt-3">
+                    {{ $clients_counter }} Encontrados
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="customer-username">Código Postal</label>
-                <input x-model="customer.postcode" x-mask="9999-999" @change="setPostcodeEventHandler" class="form-control" type="text" placeholder="Código Postal" id="customer-postcode" name="postcode" form="customer-save" autocomplete="off" @if($client) value="{{ decrypt_data($client->zip) }}" @endif  />
-            </div>
+        <div class="col-md-8 offset-2 font-bold row-border-radius">
+            <section id="app-list-header">
+                <div>Cliente</div>
+                <div>Tags</div>
+                <div>Estado</div>
+                <div>Ações</div>
+            </section>
         </div>
-        <div class="col-md-7">
-            <div class="form-group">
-                <label for="customer-username">Localidade</label>
-                <input x-model="customer.location" class="form-control" type="text" placeholder="Localidade" id="customer-location" name="location" form="customer-save" autocomplete="off" @if(!is_null($client)) value="{{ decrypt_data($client->location) }}" @endif  disabled />
-            </div>
+        <div class="col-md-8 offset-2">
+            @forelse($clients as $index => $client)
+                <article class="app-customer">
+                    <div><img class="app-customer-avatar" src="{{ $client->avatar->image }}"/></div>
+                    <div>
+                        <div class="text-bold">{{ decrypt_data($client->name) }}</div>
+                        <div><small>{{ decrypt_data($client->email) }}</small></div>
+                    </div>
+                    {{ $client->tags->count() }}
+                    <div>
+                        {{ decrypt_data($client->city) }}
+                    </div>
+                    <div>
+                        <a class="btn btn-transparent" href="{{ route('app.clients.show', $client->slug) }}">
+                            <i class="ri ri-eye-line"></i>
+                        </a>
+                        <a class="btn btn-transparent" href="{{ route('app.clients.edit', $client->slug) }}">
+                            <i class="ri ri-pencil-line"></i>
+                        </a>
+                        <button class="btn btn-transparent text-danger" wire:click="delete('{{ $client->slug }}')">
+                            <i class="ri ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                    <div></div>
+                    <div></div>
+                </article>
+            @empty
+                <article id="app-list-nocustomers">
+                    Não há clientes registados, <a href="{{ route('clients.create') }}">adicione</a> o primeiro.
+                </article>
+            @endforelse
         </div>
-    </div>
-    <div class="form-group">
-        <label for="customer-mobile">Telemóvel</label>
-        <input x-mask="999 999 999" class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile" form="customer-save" @if(!is_null($client)) value="{{ $client->phone }}" @endif  />
     </div>
 </div>

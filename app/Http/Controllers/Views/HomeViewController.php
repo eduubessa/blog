@@ -29,7 +29,7 @@ class HomeViewController extends Controller
 
         return view('pages.home')
             ->with([
-                'customers' => $customers,
+                'clients' => $customers,
                 'campaigns' => $campaigns,
                 'messages' => $messages,
                 'doctors' => $doctors,
