@@ -43,8 +43,12 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                        <label for="customer-username">Nome</label>
-                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-name" name="name" form="customer-save" autocomplete="off" />
+                        <label for="customer-username">Primeiro nome</label>
+                        <input class="form-control" type="text" placeholder="Primeiro nome do cliente" id="customer-firstname" name="firstname" form="customer-save" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-username">Apelido</label>
+                        <input class="form-control" type="text" placeholder="Apelido do cliente" id="customer-lastname" name="lastname" form="customer-save" autocomplete="off" />
                     </div>
                     <div class="form-group">
                         <label for="customer-email">E-mail</label>

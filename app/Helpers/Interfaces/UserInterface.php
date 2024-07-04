@@ -11,5 +11,7 @@ interface UserInterface {
     const STATUS_DELETED        = "USER::STATUS::DELETED";
     const STATUS_BANNED         = "USER::STATUS::BANNED";
     const STATUS_EXPIRED        = "USER::STATUS::EXPIRED";
+    const TYPE_CLIENT           = "USER::TYPE::CLIENT";
+    const TYPE_ADMIN            = "USER::TYPE::ADMIN";
 
 }

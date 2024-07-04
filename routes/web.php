@@ -20,7 +20,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/activation/{token}', [SignUpViewController::class, 'activate'])->name('activation');
 })->middleware('guest');
 
-Route::middleware('authenticate')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/', [HomeViewController::class, 'index'])->name('home');
     Route::get('/home', [HomeViewController::class, 'index'])->name('static.home');
 

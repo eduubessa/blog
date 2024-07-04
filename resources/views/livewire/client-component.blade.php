@@ -39,23 +39,23 @@
         <div class="col-md-8 offset-2">
             @forelse($clients as $index => $client)
                 <article class="app-customer">
-                    <div><img class="app-customer-avatar" src="{{ $client->avatar->image }}"/></div>
+                    <div><img class="app-customer-avatar" src="{{ $client->user->avatar->image }}"/></div>
                     <div>
-                        <div class="text-bold">{{ decrypt_data($client->name) }}</div>
-                        <div><small>{{ decrypt_data($client->email) }}</small></div>
+                        <div class="text-bold">{{ decrypt_data($client->user->firstname) }}</div>
+                        <div><small>{{ decrypt_data($client->user->email) }}</small></div>
                     </div>
                     {{ $client->tags->count() }}
                     <div>
-                        {{ decrypt_data($client->city) }}
+                        {{ decrypt_data($client->user->city) }}
                     </div>
                     <div>
-                        <a class="btn btn-transparent" href="{{ route('app.clients.show', $client->slug) }}">
+                        <a class="btn btn-transparent" href="{{ route('clients.show', $client->user->username) }}">
                             <i class="ri ri-eye-line"></i>
                         </a>
-                        <a class="btn btn-transparent" href="{{ route('app.clients.edit', $client->slug) }}">
+                        <a class="btn btn-transparent" href="{{ route('clients.edit', $client->user->username) }}">
                             <i class="ri ri-pencil-line"></i>
                         </a>
-                        <button class="btn btn-transparent text-danger" wire:click="delete('{{ $client->slug }}')">
+                        <button class="btn btn-transparent text-danger" wire:click="delete('{{ $client->user->username }}')">
                             <i class="ri ri-delete-bin-line"></i>
                         </button>
                     </div>

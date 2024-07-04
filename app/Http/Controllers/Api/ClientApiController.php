@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Interfaces\UserInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientStoreRequest;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientApiController extends Controller
 {
@@ -22,14 +24,41 @@ class ClientApiController extends Controller
 
     public function store(ClientStoreRequest $request)
     {
-        if(!$request->validated()) {
+        if (!$request->validated()) {
             return back()->withInput()->withErrors($request->errors());
         }
 
         $user = new User();
+        $user->avatar_id = 1;
         $user->firstname = encrypt_data($request->input('firstname'));
         $user->lastname = encrypt_data($request->input('lastname'));
         $user->email = $request->input('email');
-        $user->mobile_phone = $request->input('mobile_phone');
+        $user->mobile_phone = $request->input('mobile');
+        $user->username = "user_". rand(100000, 999999);
+        $user->password = "user_". rand(100000, 999999);
+        $user->type = UserInterface::TYPE_CLIENT;
+        $user->status = UserInterface::STATUS_ACTIVE;
+
+        if(!$user->save()){
+            Log::error('CLIENT | USER STORE | ERROR: '.$user->errors() .' | IP ADDRESS: ' . $request->ip());
+            return back()->withInput()->withErrors($user->errors());
+        }
+
+        $client = new Client();
+        $client->user_id = $user->id;
+        $client->address_line_1 = encrypt_data($request->input('address_line_1'));
+        $client->address_line_2 = encrypt_data($request->input('address_line_2'));
+        $client->city = encrypt_data($request->input('city'));
+        $client->state = encrypt_data($request->input('state'));
+        $client->country = encrypt_data($request->input('country'));
+        $client->postcode = encrypt_data($request->input('postcode'));
+
+        if(!$client->save()){
+            Log::error('CLIENT | CLIENT STORE | ERROR: '.$client->errors() .' | IP ADDRESS: ' . $request->ip());
+            return back()->withInput()->withErrors($client->errors());
+        }
+
+        return redirect()->route('clients.index')->with('success', 'Client created successfully');
     }
+}
 

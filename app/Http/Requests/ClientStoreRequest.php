@@ -11,7 +11,7 @@ class ClientStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -23,6 +23,10 @@ class ClientStoreRequest extends FormRequest
     {
         return [
             //
+            'firstname' => 'required|string|min:3|max:255',
+            'lastname' => 'required|string|min:3|max:255',
+            'email' => 'required|email|min:3|max:255|unique:users,email',
+            'mobile' => 'required|string|min:3|max:255',
         ];
     }
 }

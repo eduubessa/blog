@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('type')->default(UserInterface::TYPE_CLIENT);
             $table->string('status')->default(UserInterface::STATUS_PENDING);
             $table->rememberToken();
             $table->timestamps();
