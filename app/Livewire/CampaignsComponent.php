@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Campaign;
+use Illuminate\Support\Facades\Artisan;
 use Livewire\Component;
 
 class CampaignsComponent extends Component
@@ -15,8 +16,7 @@ class CampaignsComponent extends Component
 
     public function importClickEventHandler(): void
     {
-        ImportCampaigns::dispatch(auth()->user());
-
+        Artisan::call('service:campaigns:import');
         $this->campaigns = Campaign::all();
     }
 

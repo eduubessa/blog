@@ -38,7 +38,7 @@
             </aside>
         </div>
     </div>
-    <form id="auth-submit" name="auth-submit" action="{{ route('auth.sign-in.authenticate') }}" method="post" autocomplete="off">
+    <form id="auth-submit" name="auth-submit" action="{{ route('authenticate') }}" method="post" autocomplete="off">
         @csrf
     </form>
 @endsection

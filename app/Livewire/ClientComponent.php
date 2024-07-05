@@ -54,7 +54,8 @@ class ClientComponent extends Component
     public function render(): Factory|\Illuminate\Foundation\Application|View|Application
     {
         $clientsCount = Client::count();
-        $clients = Client::with('user', 'tags')
+
+        $clients = Client::with('user', 'user.avatar', 'tags')
             ->paginate(30);
 
         return view('livewire.client-component')

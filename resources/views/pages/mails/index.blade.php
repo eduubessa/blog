@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <livewire:client-component />
+    <livewire:mail-component />
 @endsection
 
 @push('scripts')

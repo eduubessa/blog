@@ -61,9 +61,9 @@ class User extends Authenticatable
         return $this->hasOne(ActivationAccount::class);
     }
 
-    public function avatar(): BelongsTo
+    public function avatar(): HasOne
     {
-        return $this->belongsTo(Avatar::class);
+        return $this->hasOne(Avatar::class, 'id', 'avatar_id');
     }
 
 }

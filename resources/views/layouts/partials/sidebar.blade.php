@@ -22,8 +22,14 @@
         </li>
         <li class="nav-item">
             <a href="{{ route('campaigns.index') }}">
-                <i class="ri ri-mail-line"></i>
+                <i class="ri ri-megaphone-line"></i>
                 <p>Campanhas</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('mails.index') }}">
+                <i class="ri ri-mail-line"></i>
+                <p>E-mails</p>
             </a>
         </li>
         <li class="nav-item">

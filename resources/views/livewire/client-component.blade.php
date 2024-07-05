@@ -42,7 +42,7 @@
                     <div><img class="app-customer-avatar" src="{{ $client->user->avatar->image }}"/></div>
                     <div>
                         <div class="text-bold">{{ decrypt_data($client->user->firstname) }}</div>
-                        <div><small>{{ decrypt_data($client->user->email) }}</small></div>
+                        <div><small>{{ $client->user->email }}</small></div>
                     </div>
                     {{ $client->tags->count() }}
                     <div>

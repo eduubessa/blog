@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Views;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MailViewController extends Controller
+class TagViewController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.mails.index');
+        return view('pages.tags.index');
     }
 }

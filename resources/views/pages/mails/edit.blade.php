@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-md-8 offset-2 bg-white row-border-radius bg-white py-2 mb-4">
             <div class="container">
-                <div>
+                <div x-data="customers">
                     <div class="row mt-3">
                         <div class="col-md-9">
                             <h6 class="mt-2">Informações do cliente</h6>
@@ -43,12 +43,8 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                        <label for="customer-username">Primeiro nome</label>
-                        <input class="form-control" type="text" placeholder="Primeiro nome do cliente" id="customer-firstname" name="firstname" form="customer-save" autocomplete="off" />
-                    </div>
-                    <div class="form-group">
-                        <label for="customer-username">Apelido</label>
-                        <input class="form-control" type="text" placeholder="Apelido do cliente" id="customer-lastname" name="lastname" form="customer-save" autocomplete="off" />
+                        <label for="customer-username">Nome</label>
+                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-name" name="name" form="customer-save" autocomplete="off" />
                     </div>
                     <div class="form-group">
                         <label for="customer-email">E-mail</label>
@@ -85,13 +81,11 @@
                         <input x-mask="999 999 999" class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile" form="customer-save"  />
                     </div>
                 </div>
-{{--                <livewire:backoffice.components.customers.tags-component />--}}
+                {{--                <livewire:backoffice.components.customers.tags-component />--}}
             </div>
         </div>
-        <!-- Tags -->
-        <livewire:tag-component />
     </div>
-    <div class="row mb-4">
+    <div class="row mb-4" x-data="customers">
         <div class="col-md-8 offset-2 text-right pt-3">
             <form id="customer-save" action="{{ route('clients.store') }}" method="post" autocomplete="off">
                 {{ csrf_field() }}
