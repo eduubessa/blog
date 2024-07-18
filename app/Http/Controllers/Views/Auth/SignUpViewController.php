@@ -17,12 +17,13 @@ class SignUpViewController extends Controller
     {
         $activate = ActivationAccount::where('token', $token)->firstOrFail();
 
-        if ($activate->status == ActivationAccountInterface::STATUS_ACTIVE) {
-            return redirect()->route('auth.activation', $token)->with('error', 'Esta ativação não é valida!');
+        if ($activate->status == ActivationAccountInterface::STATUS_USED) {
+            return redirect()->route('auth.login')->with('error', 'Esta ativação não é valida!');
         }
 
         $user = User::find($activate->user_id);
         $user->status = UserInterface::STATUS_ACTIVE;
+
         if (!$user->save()) {
             Log::error("FAILED | ID: {$user->id} | UPDATED USER STATUS TO {$user->email}! TRY AGAIN, PLEASE!");
             return back()->withErrors(['message' => 'Falha ao ativar conta. Tente novamente.']);
@@ -32,11 +33,11 @@ class SignUpViewController extends Controller
 
         if (!$activate->save()) {
             Log::error("FAILED | ID: {$activate->id} | UPDATED ACTIVATION ACCOUNT STATUS TO {$activate->email}! TRY AGAIN, PLEASE!");
-            return back()->withErrors(['message' => 'Falha ao ativar conta. Tente novamente.']);
+            return redirect()->route('auth.login')->withErrors(['message' => 'Falha ao ativar conta. Tente novamente.']);
         }
 
         session()->flash('message', "Conta ativada com sucesso!");
 
-        return redirect()->route('auth.sign-in');
+        return redirect()->route('auth.login');
     }
 }

@@ -5,14 +5,14 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
 
-function encrypt_data($value): string
+function encrypt_data($value): mixed
 {
-    return Crypt::encryptString($value);
+    return Crypt::encrypt($value);
 }
 
-function decrypt_data($value): string
+function decrypt_data($value): mixed
 {
-    return !is_null($value) ? Crypt::decryptString($value) : "";
+    return !is_null($value) ? Crypt::decrypt($value) : "";
 }
 
 function getCampaignIdFromCode(string $code): string

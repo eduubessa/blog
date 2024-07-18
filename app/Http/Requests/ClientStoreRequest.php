@@ -25,8 +25,12 @@ class ClientStoreRequest extends FormRequest
             //
             'firstname' => 'required|string|min:3|max:255',
             'lastname' => 'required|string|min:3|max:255',
-            'email' => 'required|email|min:3|max:255|unique:users,email',
-            'mobile' => 'required|string|min:3|max:255|unique:users,mobile_phone',
+            'email' => 'required|email|min:3|max:50|unique:users,email',
+            'address-line-1' => 'required|string|min:3|max:150',
+            'address-line-2' => 'string|min:3|max:150',
+            'postcode' => 'required|string|min:3|max:10',
+            'city' => 'required|string|min:3|max:50',
+            'mobile-phone' => 'required|string|min:3|max:12|unique:users,mobile_phone',
         ];
     }
 }

@@ -22,7 +22,7 @@ class SignInApiController extends Controller
     {
         if(RateLimiter::tooManyAttempts($request->ip(), $this->attempts)) {
             Log::info('SIGN IN | SIGN IN RATE LIMIT | ATTEMPTS: ' . $this->attempts . ' | IP ADDRESS: ' . $request->ip());
-            return back()->with()->withInput()->withErrors(['message' => 'Demasiadas tentativas de acesso. Por favor, tente novamente em 1 hora.']);
+            return back()->withInput()->withErrors(['message' => 'Demasiadas tentativas de acesso. Por favor, tente novamente em 1 hora.']);
         }
 
         if(!$request->validated()) {
@@ -50,6 +50,7 @@ class SignInApiController extends Controller
                 RateLimiter::clear($request->ip());
                 return (session()->has('url.intended')) ? redirect(session()->get('url.intended')) : redirect()->route('home');
             }
+
             return redirect()->route('auth.sign-in')->withErrors(['message' => 'O utilizador não está ativo, verifique o seu e-mail para ativar a conta']);
         }
 

@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label for="customer-username">Data de nascimento</label>
-                        <input class="form-control" type="date" id="customer-birthday" name="birthday" form="customer-save" autocomplete="off" />
+                        <input class="form-control" type="date" id="customer-birthday" name="date-birth" form="customer-save" autocomplete="off" />
                     </div>
                     <div class="form-group">
                         <label for="customer-username">Morada</label>
@@ -76,7 +76,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <label for="customer-username">Localidade</label>
-                                <input x-model="customer.location" class="form-control" type="text" placeholder="Localidade" id="customer-location" name="location" form="customer-save" autocomplete="off"  />
+                                <input x-model="customer.location" class="form-control" type="text" placeholder="Localidade" id="customer-location" name="city" form="customer-save" autocomplete="off"  />
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard', ['title' => 'Criar cliente'])
+@extends('layouts.dashboard', ['title' => 'Editar cliente'])
 
 @section('content')
     <div class="row mb-4">
@@ -44,55 +44,55 @@
                     <hr />
                     <div class="form-group">
                         <label for="customer-firstname">Primeiro nome</label>
-                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-firstname" name="firstname" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->user->firstname) }}" />
+                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-firstname" name="firstname" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->firstname) }}" />
                     </div>
                     <div class="form-group">
                         <label for="customer-lastname">Apelido</label>
-                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-lastname" name="lastname" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->user->lastname) }}" />
+                        <input class="form-control" type="text" placeholder="Nome do cliente" id="customer-lastname" name="lastname" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->lastname) }}" />
                     </div>
                     <div class="form-group">
                         <label for="customer-email">E-mail</label>
-                        <input class="form-control" type="email" placeholder="E-mail" id="customer-email" name="email" form="customer-save" autocomplete="off" value="{{ $client->user->email }}" />
+                        <input class="form-control" type="email" placeholder="E-mail" id="customer-email" name="email" form="customer-save" autocomplete="off" value="{{ $user->email }}" />
                     </div>
                     <div class="form-group">
                         <label for="customer-username">Data de nascimento</label>
-                        <input class="form-control" type="date" id="customer-birthday" name="birthday" form="customer-save" autocomplete="off" value="{{ $client->user->birth_date }}" />
+                        <input class="form-control" type="date" id="customer-birthday" name="date-birth" form="customer-save" autocomplete="off" value="{{ $user->birth_date }}" />
                     </div>
                     <div class="form-group">
                         <label for="customer-username">Morada</label>
-                        <input class="form-control" tcype="text" placeholder="Rua, Avenida" id="customer-address-line-1" name="address-line-1" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->address_line_1) }}" />
+                        <input class="form-control" tcype="text" placeholder="Rua, Avenida" id="customer-address-line-1" name="address-line-1" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->client->address_line_1) }}" />
                     </div>
                     <div class="form-group">
                         <label for="customer-username">Porta, Andar, Letra</label>
-                        <input class="form-control" type="text" placeholder="Porta, Andar, Letra" id="customer-address-line-2" name="address-line-2" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->address_line_2) }}"  />
+                        <input class="form-control" type="text" placeholder="Porta, Andar, Letra" id="customer-address-line-2" name="address-line-2" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->client->address_line_2) }}"  />
                     </div>
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="customer-username">Código Postal</label>
-                                <input x-model="customer.postcode" x-mask="9999-999" @change="setPostcodeEventHandler" class="form-control" type="text" placeholder="Código Postal" id="customer-postcode" name="postcode" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->postcode) }}" />
+                                <input class="form-control" type="text" placeholder="Código Postal" id="customer-postcode" name="postcode" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->client->postcode) }}" />
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
                                 <label for="customer-username">Localidade</label>
-                                <input x-model="customer.location" class="form-control" type="text" placeholder="Localidade" id="customer-location" name="location" form="customer-save" autocomplete="off" value="{{ decrypt_data($client->state) }}"  />
+                                <input class="form-control" type="text" placeholder="Localidade" id="customer-location" name="city" form="customer-save" autocomplete="off" value="{{ decrypt_data($user->client->city) }}"  />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="customer-mobile">Telemóvel</label>
-                        <input x-mask="999 999 999" class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile" form="customer-save" value="{{ $client->phone_number }}"  />
+                        <input class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile-phone" form="customer-save" value="{{ $user->mobile_phone }}"  />
                     </div>
                 </div>
                 <!-- Tags -->
-                <livewire:app.clients.tag-component type="update" username="{{ $client->user->username }}" />
+                <livewire:app.clients.tag-component type="update" username="{{ $user->username }}" />
             </div>
         </div>
     </div>
     <div class="row mb-4" x-data="customers">
         <div class="col-md-8 offset-2 text-right pt-3">
-            <form id="customer-save" action="{{ route('clients.update', $client->user->username) }}" method="post" autocomplete="off">
+            <form id="customer-save" action="{{ route('clients.update', $user->username) }}" method="post" autocomplete="off">
                 {{ csrf_field() }}
                 <button form="customer-save" type="submit" class="btn btn-filter inverter pull-right">Guardar</button>
             </form>

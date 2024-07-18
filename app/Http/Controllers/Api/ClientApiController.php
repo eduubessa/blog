@@ -35,9 +35,8 @@ class ClientApiController extends Controller
         $user->firstname = encrypt_data($request->input('firstname'));
         $user->lastname = encrypt_data($request->input('lastname'));
         $user->email = $request->input('email');
-        $user->mobile_phone = $request->input('mobile');
-        $user->username = "user_". rand(100000, 999999);
-        $user->password = "user_". rand(100000, 999999);
+        $user->mobile_phone = $request->input('mobile-phone');
+        $user->birth_date = strtotime($request->input('date-birth')) ? date('Y-m-d', strtotime($request->input('date-birth'))) : $request->input('date-birth');
         $user->type = UserInterface::TYPE_CLIENT;
         $user->status = UserInterface::STATUS_ACTIVE;
 
@@ -46,9 +45,9 @@ class ClientApiController extends Controller
             return back()->withInput()->withErrors($user->errors());
         }
 
-        $client = new Client();
-        $client->address_line_1 = encrypt_data($request->input('address_line_1'));
-        $client->address_line_2 = encrypt_data($request->input('address_line_2'));
+        $client = Client::with('tags')->where('user_id', $user->id)->firstOrFail();
+        $client->address_line_1 = encrypt_data($request->input('address-line-1'));
+        $client->address_line_2 = encrypt_data($request->input('address-line-2'));
         $client->city = encrypt_data($request->input('city'));
         $client->state = encrypt_data($request->input('state'));
         $client->country = encrypt_data($request->input('country'));
@@ -69,10 +68,14 @@ class ClientApiController extends Controller
         }
 
         $user = User::where('username', $username)->firstOrFail();
+        $user->avatar_id = 1;
         $user->firstname = encrypt_data($request->input('firstname'));
         $user->lastname = encrypt_data($request->input('lastname'));
         $user->email = $request->input('email');
-        $user->mobile_phone = $request->input('mobile');
+        $user->mobile_phone = $request->input('mobile-phone');
+        $user->birth_date = strtotime($request->input('date-birth')) ? date('Y-m-d', strtotime($request->input('date-birth'))) : $request->input('date-birth');
+        $user->type = UserInterface::TYPE_CLIENT;
+        $user->status = UserInterface::STATUS_ACTIVE;
 
         if(!$user->save()){
             Log::error('CLIENT | USER STORE | ERROR: '.$user->errors() .' | IP ADDRESS: ' . $request->ip());
@@ -80,8 +83,8 @@ class ClientApiController extends Controller
         }
 
         $client = Client::with('tags')->where('user_id', $user->id)->firstOrFail();
-        $client->address_line_1 = encrypt_data($request->input('address_line_1'));
-        $client->address_line_2 = encrypt_data($request->input('address_line_2'));
+        $client->address_line_1 = encrypt_data($request->input('address-line-1'));
+        $client->address_line_2 = encrypt_data($request->input('address-line-2'));
         $client->city = encrypt_data($request->input('city'));
         $client->state = encrypt_data($request->input('state'));
         $client->country = encrypt_data($request->input('country'));

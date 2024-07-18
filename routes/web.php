@@ -16,7 +16,7 @@ use App\Http\Controllers\Views\MailViewController;
 use App\Http\Controllers\Views\TagViewController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->group(function () {
+Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/sign-in', [SignInViewController::class, 'form'])->name('login');
     Route::post('/sign-in', [SignInApiController::class, 'authenticate'])->name('authenticate');
     Route::get('/activation/{token}', [SignUpViewController::class, 'activate'])->name('activation');

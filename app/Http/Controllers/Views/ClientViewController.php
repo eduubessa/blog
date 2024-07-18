@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Views;
 use App\Http\Controllers\Controller;
 use App\Models\Avatar;
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientViewController extends Controller
@@ -35,21 +36,13 @@ class ClientViewController extends Controller
 
     public function edit(Request $request, string $username)
     {
-        $client = Client::with(['user', 'user' => function ($query) use ($username) {
-            $query->where('username', $username);
-        }])->firstOrFail();
-
-        dd($client->toArray());
-
         $avatar = Avatar::firstOrFail();
-        $client = Client::with(['user' => function ($query) use ($username) {
-            $query->where('username', $username);
-        }])->firstOrFail();
+        $user = User::with('client')->where('username', $username)->firstOrFail();
 
         return view('pages.clients.edit')
             ->with([
                 'avatar' => $avatar,
-                'client' => $client
+                'user' => $user
             ]);
     }
 }

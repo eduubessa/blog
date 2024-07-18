@@ -13,6 +13,9 @@
                             <h3>Iniciar sessão</h3>
                             <h5>Bem-vindo de volta, preencha com as suas credenciais!</h5>
                         </header>
+                        @if(session()->has('message'))
+                            {{ session()->get('message') }}
+                        @endif
                         @if($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -38,7 +41,7 @@
             </aside>
         </div>
     </div>
-    <form id="auth-submit" name="auth-submit" action="{{ route('authenticate') }}" method="post" autocomplete="off">
+    <form id="auth-submit" name="auth-submit" action="{{ route('auth.authenticate') }}" method="post" autocomplete="off">
         @csrf
     </form>
 @endsection

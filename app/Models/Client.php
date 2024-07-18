@@ -21,9 +21,9 @@ class Client extends Model
         'id', 'user_id'
     ];
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function tags(): MorphToMany
