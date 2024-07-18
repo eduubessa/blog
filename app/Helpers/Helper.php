@@ -20,8 +20,9 @@ function getCampaignIdFromCode(string $code): string
     return str_replace('#', '', strstr($code, "#"));
 }
 
-function date_format_trans(string $date, bool $with_week = false): string
+function date_format_trans(string $date, bool $with_week = false): string|null
 {
+
     $weeks = ["Sun" => "Domingo","Mon" => "Segunda", "Tue" => "Terça", "Wed" => "Quarta","Thu" => "Quinta","Fri" => "Sexta","Sat" => "Sábado"];
 
     $months = [

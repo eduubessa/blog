@@ -52,11 +52,13 @@
                     <textarea class="form-control txt-height-large" placeholder="Corpo" id="campaign-body" name="body" form="campaign-save" autocomplete="off">@if(!is_null($campaign)) {{ $campaign->htmlContent }} @endif</textarea>
                 </div>
             </div>
+            <!-- Tags -->
+            <livewire:app.tag-component id="{{ $campaign->code }}" />
         </div>
     </div>
     <div class="row mb-4" x-data="customers">
         <div class="col-md-8 offset-2 text-right pt-3">
-            <form id="campaign-save" action="{{ route('campaigns.update', rawurlencode($campaign->code)) }}" method="post" autocomplete="off">
+            <form id="campaign-save" action="{{ route('campaigns.update', $campaign->code)   }}" method="post" autocomplete="off">
                 {{ csrf_field() }}
                 <button form="campaign-save" type="submit" class="btn btn-filter inverter pull-right">Guardar</button>
             </form>

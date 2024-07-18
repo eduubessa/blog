@@ -66,4 +66,9 @@ class User extends Authenticatable
         return $this->hasOne(Avatar::class, 'id', 'avatar_id');
     }
 
+    public function client(): HasOne
+    {
+        return $this->hasOne(Client::class);
+    }
+
 }

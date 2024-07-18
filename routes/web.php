@@ -40,24 +40,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [ClientViewController::class, 'create'])->name('create');
         Route::get('/{username}', [ClientViewController::class, 'show'])->name('show');
         Route::get('/{username}/edit', [ClientViewController::class, 'edit'])->name('edit');
-        Route::put('/{username}', [ClientApiController::class, 'update'])->name('update');
+        Route::post('/{username}', [ClientApiController::class, 'update'])->name('update');
         Route::delete('/{username}', [ClientApiController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('campaigns')->name('campaigns.')->group(function () {
         Route::get('/', [CampaignViewController::class, 'index'])->name('index');
-        Route::get('/{id}', [CampaignViewController::class, 'show'])->name('show');
         Route::post('/', [CampaignApiController::class, 'store'])->name('store');
+        Route::get('/{id}', [CampaignViewController::class, 'show'])->name('show');
         Route::get('/{id}/edit', [CampaignViewController::class, 'edit'])->name('edit');
         Route::put('/{id}', [CampaignApiController::class, 'update'])->name('update');
         Route::delete('/{id}', [CampaignApiController::class, 'destroy'])->name('destroy');
-    });
-
-
-    Route::prefix('tags')->name('tags.')->group(function () {
-        Route::get('/', [TagViewController::class, 'index'])->name('index');
-        Route::get('/{slug}', [TagApiController::class, 'show'])->name('show');
-        Route::delete('/{slug}', [TagApiController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('mails')->name('mails.')->group(function () {
@@ -66,7 +59,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [MailViewController::class, 'create'])->name('create');
         Route::get('/{id}', [MailViewController::class, 'show'])->name('show');
         Route::get('/{id}/edit', [MailViewController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [MailApiController::class, 'update'])->name('update');
+        Route::post('/{id}', [MailApiController::class, 'update'])->name('update');
         Route::delete('/{id}', [MailApiController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('tags')->name('tags.')->group(function () {
+        Route::get('/', [TagViewController::class, 'index'])->name('index');
+        Route::get('/{slug}', [TagApiController::class, 'show'])->name('show');
+        Route::delete('/{slug}', [TagApiController::class, 'destroy'])->name('destroy');
+    });
+
 });

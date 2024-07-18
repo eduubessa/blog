@@ -96,14 +96,14 @@
                         @forelse($birthdays as $birthday)
                             <div class="row">
                                 <div class="col-md-1">
-                                    <img
-                                        src="https://img.freepik.com/premium-vector/portrait-young-man-with-beard-hair-style-male-avatar-vector-illustration_266660-423.jpg?w=2000"/>
+                                    <img src="{{ $birthday->avatar->image }}" />
                                 </div>
-                                <div class="col-md-5">
-                                    {{ decrypt_data($birthday->name) }}
+                                <div class="col-md-8">
+                                    {{ decrypt_data($birthday->firstname) }}
+                                    {{ decrypt_data($birthday->lastname) }}
                                 </div>
-                                <div class="col-md-4">
-                                    {{ date_format_trans($birthday->birthday, true) }}
+                                <div class="col-md-3">
+                                    {{ date_format_trans($birthday->birth_date, true) }}
                                 </div>
                             </div>
                         @empty

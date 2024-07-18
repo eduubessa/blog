@@ -41,7 +41,7 @@
                         @endswitch
                     </div>
                     <div>
-                        <a class="btn btn-transparent" href="{{ route('mails.edit', rawurlencode($mail->code)) }}">
+                        <a class="btn btn-transparent" href="{{ route('mails.edit', $mail->id) }}">
                             <i class="ri ri-pencil-line"></i>
                         </a>
                         <button class="btn btn-transparent text-danger" wire:click="deleteClickEventHandler({{ $mail->id }})" wire:confirm="Deseja mesmo apagar esta campanha?">

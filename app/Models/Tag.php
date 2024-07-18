@@ -12,11 +12,14 @@ class Tag extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name', 'slug', 'created_at', 'updated_at'
     ];
 
-    protected $hidden = [
-        'id'
+    protected $casts = [
+        'name' => 'string',
+        'slug' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
 
     public function campaigns(): MorphToMany

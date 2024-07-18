@@ -85,11 +85,9 @@
                         <input x-mask="999 999 999" class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile" form="customer-save"  />
                     </div>
                 </div>
-{{--                <livewire:backoffice.components.customers.tags-component />--}}
+                <livewire:app.clients.tag-component />
             </div>
         </div>
-        <!-- Tags -->
-        <livewire:tag-component />
     </div>
     <div class="row mb-4">
         <div class="col-md-8 offset-2 text-right pt-3">

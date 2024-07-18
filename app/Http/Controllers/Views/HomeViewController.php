@@ -18,18 +18,19 @@ class HomeViewController extends Controller
     {
         $today = now()->format('m-d');
         $nextWeek = now()->addWeek()->format('m-d');
-        $customers = Client::count();
+        $clients = Client::count();
 
         $campaigns = 0;
         $messages = 0;
         $doctors = 0;
 
-        $birthdays = User::whereRaw("DATE_FORMAT(birth_date, '%m-%d') BETWEEN '{$today}' AND '{$nextWeek}'")->paginate(5);
-
+        $birthdays = User::with('avatar')->whereRaw("DATE_FORMAT(birth_date, '%m-%d') BETWEEN '{$today}' AND '{$nextWeek}'")
+            ->limit(5)
+            ->get();
 
         return view('pages.home')
             ->with([
-                'clients' => $customers,
+                'clients' => $clients,
                 'campaigns' => $campaigns,
                 'messages' => $messages,
                 'doctors' => $doctors,

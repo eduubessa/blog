@@ -17,6 +17,8 @@ class ClientViewController extends Controller
 
     public function show(Request $request, $id)
     {
+        dd(Client::with('user')->find($id));
+
         return view('pages.clients.show')
             ->with([
                 'client' => Client::with('user')->find($id),

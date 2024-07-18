@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <livewire:tag-component />
+    <livewire:tag-component model="" />
 @endsection
 
 @push('scripts')

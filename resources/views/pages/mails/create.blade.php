@@ -85,7 +85,8 @@
                         <input x-mask="999 999 999" class="form-control" type="text" placeholder="Telemóvel" id="customer-mobile" name="mobile" form="customer-save"  />
                     </div>
                 </div>
-{{--                <livewire:backoffice.components.customers.tags-component />--}}
+                <!-- Tags -->
+                <livewire:app.tag-component id="{{ $client->user->username }}" />
             </div>
         </div>
         <!-- Tags -->
