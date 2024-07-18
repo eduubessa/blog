@@ -26,7 +26,7 @@ class ClientStoreRequest extends FormRequest
             'firstname' => 'required|string|min:3|max:255',
             'lastname' => 'required|string|min:3|max:255',
             'email' => 'required|email|min:3|max:255|unique:users,email',
-            'mobile' => 'required|string|min:3|max:255',
+            'mobile' => 'required|string|min:3|max:255|unique:users,mobile_phone',
         ];
     }
 }

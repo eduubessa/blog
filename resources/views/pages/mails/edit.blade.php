@@ -1,4 +1,4 @@
-@extends('layouts.dashboard', ['title' => 'Criar cliente'])
+@extends('layouts.dashboard', ['title' => 'Editar mail'])
 
 @section('content')
     <div class="row mb-4">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <!-- Tags -->
-                <livewire:app.tag-component id="{{ $mail->id }}" />
+                <livewire:app.mails.tag-component id="{{ $mail->id }}" />
             </div>
         </div>
     </div>

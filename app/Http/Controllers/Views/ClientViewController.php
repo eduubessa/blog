@@ -17,8 +17,6 @@ class ClientViewController extends Controller
 
     public function show(Request $request, $id)
     {
-        dd(Client::with('user')->find($id));
-
         return view('pages.clients.show')
             ->with([
                 'client' => Client::with('user')->find($id),
@@ -37,6 +35,12 @@ class ClientViewController extends Controller
 
     public function edit(Request $request, string $username)
     {
+        $client = Client::with(['user', 'user' => function ($query) use ($username) {
+            $query->where('username', $username);
+        }])->firstOrFail();
+
+        dd($client->toArray());
+
         $avatar = Avatar::firstOrFail();
         $client = Client::with(['user' => function ($query) use ($username) {
             $query->where('username', $username);

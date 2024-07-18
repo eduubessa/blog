@@ -28,22 +28,22 @@
                     </div>
                     <div>
                         @switch($mail->status)
-                            @case(CampaignInterface::STATUS_ACTIVE)
-                                <span class="badge badge-success bg-success">Campanha</span>
+                            @case(\App\Helpers\Interfaces\MailInterface::STATUS_ACTIVE)
+                                <p class="badge badge-success bg-success">Campanha</p>
                                 @break
-                            @case(CampaignInterface::STATUS_DRAFT)
-                                <span class="badge badge-warning bg-warning">Racunho</span>
+                            @case(\App\Helpers\Interfaces\MailInterface::STATUS_DRAFT)
+                                <p class="badge badge-warning bg-warning">Racunho</p>
                                 @break
-                            @case(CampaignInterface::STATUS_DEACTIVATED)
-                            @case(CampaignInterface::STATUS_EXPIRED)
-                                <span class="badge badge-warning bg-warning">Expirada</span>
+                            @case(\App\Helpers\Interfaces\MailInterface::STATUS_DEACTIVATED)
+                            @case(\App\Helpers\Interfaces\MailInterface::STATUS_EXPIRED)
+                                <p class="badge badge-warning bg-warning">Expirada</p>
                                 @break
                         @endswitch
                     </div>
                     <div>
-                        <a class="btn btn-transparent" href="{{ route('mails.edit', $mail->id) }}">
-                            <i class="ri ri-pencil-line"></i>
-                        </a>
+                        {{--                        <a class="btn btn-transparent" href="{{ route('mails.edit', $mail->id) }}">--}}
+                        {{--                            <i class="ri ri-pencil-line"></i>--}}
+                        {{--                        </a>--}}
                         <button class="btn btn-transparent text-danger" wire:click="deleteClickEventHandler({{ $mail->id }})" wire:confirm="Deseja mesmo apagar esta campanha?">
                             <i class="ri ri-delete-bin-line"></i>
                         </button>

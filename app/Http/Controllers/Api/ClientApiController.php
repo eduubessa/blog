@@ -47,7 +47,6 @@ class ClientApiController extends Controller
         }
 
         $client = new Client();
-        $client->user_id = $user->id;
         $client->address_line_1 = encrypt_data($request->input('address_line_1'));
         $client->address_line_2 = encrypt_data($request->input('address_line_2'));
         $client->city = encrypt_data($request->input('city'));
@@ -55,7 +54,7 @@ class ClientApiController extends Controller
         $client->country = encrypt_data($request->input('country'));
         $client->postcode = encrypt_data($request->input('postcode'));
 
-        if(!$client->save()){
+        if(!$user->client()->save($client)){
             Log::error('CLIENT | CLIENT STORE | ERROR: '.$client->errors() .' | IP ADDRESS: ' . $request->ip());
             return back()->withInput()->withErrors($client->errors());
         }
