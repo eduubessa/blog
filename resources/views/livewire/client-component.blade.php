@@ -49,9 +49,6 @@
                         {{ decrypt_data($client->user->city) }}
                     </div>
                     <div>
-                        <a class="btn btn-transparent" href="{{ route('clients.show', $client->user->username) }}">
-                            <i class="ri ri-eye-line"></i>
-                        </a>
                         <a class="btn btn-transparent" href="{{ route('clients.edit', $client->user->username) }}">
                             <i class="ri ri-pencil-line"></i>
                         </a>

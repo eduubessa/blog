@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Crypt;
 
 function encrypt_data($value): mixed
 {
-    return Crypt::encrypt($value);
+    return Crypt::encryptString($value);
 }
 
 function decrypt_data($value): mixed
 {
-    return !is_null($value) ? Crypt::decrypt($value) : "";
+    return !is_null($value) ? Crypt::decryptString($value) : "";
 }
 
 function getCampaignIdFromCode(string $code): string
