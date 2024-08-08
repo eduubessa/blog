@@ -2,29 +2,34 @@
 
 namespace App\Livewire\App\Campaigns;
 
+use App\Models\Campaign;
 use App\Models\Tag;
-use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class TagComponent extends Component
 {
+    public string $code;
     public string $tag = "";
     public string $type = "create";
-    public string|null $username = null;
 
     public string $name = "";
     public array|Collection $suggestions = [];
 
     public array $tags = [];
-    public mixed $user = null;
+    public mixed $campaign = null;
+
+    public int $nav_suggestions = -1;
 
     #[On('tags-refresh')]
-    public function refresh()
+    public function refresh(): void
     {
-        $this->tags = $this->user->client->tags->pluck('name', 'id')->toArray();
+        $this->tags = $this->campaign->tags->pluck('name', 'id')->toArray();
     }
 
     public function findAndUpdateSuggestionsEventHandler(): void
@@ -43,7 +48,7 @@ class TagComponent extends Component
         $tag = Tag::where('name', $value)->first();
 
         if($this->type == "update"){
-            $this->user->client->tags()->attach($tag->id);
+            $this->campaign->tags()->attach($tag->id);
             $this->dispatch('tags-refresh');
         }else{
             $this->tags = array_merge($this->tags, [$tag->id => $tag->name]);
@@ -52,6 +57,21 @@ class TagComponent extends Component
         $this->name = "";
         $this->suggestions = $this->suggestions->forget($key);
 
+    }
+
+    public function navNextSuggestionEventHandler(): void
+    {
+
+        if($this->nav_suggestions < $this->suggestions->count() - 1){
+            $this->nav_suggestions++;
+        }
+    }
+
+    public function navPrevSuggestionEventHandler(): void
+    {
+        if($this->nav_suggestions > 0){
+            $this->nav_suggestions--;
+        }
     }
 
     public function addOrCreateEventHandler(): void
@@ -67,7 +87,7 @@ class TagComponent extends Component
             $tag->save();
 
             if($this->type == "update"){
-                $this->user->client->tags()->attach($tag->id);
+                $this->campaign->tags()->attach($tag->id);
                 $this->dispatch('tags-refresh');
             }else{
                 $this->tags = array_merge($this->tags, [$tag->id => $this->name]);
@@ -76,7 +96,7 @@ class TagComponent extends Component
         }else{
             $tag = $tags->first();
             if($this->type == "update"){
-                $this->user->client->tags()->attach($tag->id);
+                $this->campaign->tags()->attach($tag->id);
             }else{
                 $this->tags = array_merge($this->tags, [$tag->id => $tag->name]);
             }
@@ -90,22 +110,23 @@ class TagComponent extends Component
         if($this->type == "update")
         {
             $tag = Tag::where('name', $value)->first();
-            $this->user->client->tags()->detach($tag->id);
+            $this->campaign->tags()->detach($tag->id);
             $this->dispatch('tags-refresh');
         }else{
             $this->tags = $this->tags->forget($key);
         }
     }
 
-    public function mount()
+    public function mount(): void
     {
-        if ($this->type == "update" && $this->username) {
-            $this->user = User::with('client', 'client.tags')->where('username', $this->username)->firstOrFail();
-            $this->tags = $this->user->client->tags->pluck('name', 'id')->toArray();
+
+        if ($this->type == "update" && $this->code) {
+            $this->campaign = Campaign::with('tags')->where('code', $this->code)->firstOrFail();
+            $this->tags = $this->campaign->tags->pluck('name', 'id')->toArray();
         }
     }
 
-    public function render()
+    public function render(): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|View|Application
     {
         return view('livewire.app.campaigns.tag-component');
     }

@@ -43,7 +43,7 @@
                         @endswitch
                     </div>
                     <div>
-                        <a class="btn btn-transparent" href="{{ route('campaigns.edit', $campaign->id) }}">
+                        <a class="btn btn-transparent" href="{{ route('campaigns.edit', $campaign->code) }}">
                             <i class="ri ri-pencil-line"></i>
                         </a>
                         <button class="btn btn-transparent text-danger" wire:click="deleteClickEventHandler({{ $campaign->id }})" wire:confirm="Deseja mesmo apagar esta campanha?">

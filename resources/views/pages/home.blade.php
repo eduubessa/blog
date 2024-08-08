@@ -78,7 +78,7 @@
                             <span><i class="ri-nurse-line"></i></span>
                             Médicos ativos
                         </h5>
-                        <small>Número total do médicos online</small>
+                        <small>Em construção</small>
                     </div>
                     <div class="row mt-4">
                         <canvas id="doctors-sent-chart" width="200" height="200"></canvas>

@@ -53,7 +53,7 @@
                 </div>
             </div>
             <!-- Tags -->
-            <livewire:app.tag-component id="{{ $campaign->code }}" />
+            <livewire:app.campaigns.tag-component type="update" code="{{ $campaign->code }}" />
         </div>
     </div>
     <div class="row mb-4" x-data="customers">

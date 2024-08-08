@@ -15,12 +15,12 @@
                     </section>
                 @endif
                 <section id="tag-input" class="mt-4">
-                    <input type="text" class="form-control" name="tag" wire:model="name" wire:keyup="findAndUpdateSuggestionsEventHandler" wire:keydown.enter="addOrCreateEventHandler" />
+                    <input type="text" class="form-control" name="tag" wire:model="name" wire:keyup="findAndUpdateSuggestionsEventHandler"  wire:keydown.down.prevent="navNextSuggestionEventHandler" wire:keydown.up.prevent="navPrevSuggestionEventHandler" wire:keydown.enter="addOrCreateEventHandler" />
                     @if($suggestions)
                         <nav id="tags-suggestions">
                             <ul>
                                 @foreach($suggestions as $key => $suggestion)
-                                    <li wire:key="{{ $suggestion->id }}" wire:click.prevent="addSuggestionClickEventHandler('{{ $suggestion->name }}', '{{ $key }}')">{{ $suggestion->name }}</li>
+                                    <li wire:key="{{ $suggestion->id }}" :class="{ 'selected': {{ $nav_suggestions }} == {{ $key }} }" wire:click.prevent="addSuggestionClickEventHandler('{{ $suggestion->name }}', '{{ $key }}')">{{ $suggestion->name }}</li>
                                 @endforeach
                             </ul>
                         </nav>

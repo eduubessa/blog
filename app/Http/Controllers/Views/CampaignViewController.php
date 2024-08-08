@@ -14,9 +14,9 @@ class CampaignViewController extends Controller
         return view('pages.campaigns.index');
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $code)
     {
-        $campaign = Campaign::where('code', $id)->firstOrFail();
+        $campaign = Campaign::where('code', $code)->firstOrFail();
 
         return view('pages.campaigns.edit')
             ->with([

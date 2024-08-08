@@ -97,8 +97,9 @@ class TagComponent extends Component
         }
     }
 
-    public function mount()
+    public function mount(): void
     {
+
         if($this->type == "update" && $this->username){
             $this->user = User::with('client', 'client.tags')->where('username', $this->username)->firstOrFail();
             $this->tags = $this->user->client->tags->pluck('name', 'id')->toArray();

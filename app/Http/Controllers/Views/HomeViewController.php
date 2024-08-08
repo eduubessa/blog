@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Views;
 
 use App\Http\Controllers\Controller;
+use App\Models\Campaign;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Contracts\Console\Application;
@@ -16,11 +17,12 @@ class HomeViewController extends Controller
     //
     public function index(Request $request)
     {
+
+        $clients = Client::count();
+        $campaigns = Campaign::count();
+
         $today = now()->format('m-d');
         $nextWeek = now()->addWeek()->format('m-d');
-        $clients = Client::count();
-
-        $campaigns = 0;
         $messages = 0;
         $doctors = 0;
 

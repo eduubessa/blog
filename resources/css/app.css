@@ -391,7 +391,10 @@ main#app-main > section#app-main-content #app-main-home-card-birthdays img {
     transition: background, color, 0.4s ease;
 }
 
-#tags-list ul li:hover {
+#tags-list ul li:hover,
+#tags-list ul li:focus,
+#tags-list ul li:active,
+#tags-list ul li.selected {
     color: #fff;
     cursor: pointer;
     padding: 4px 16px;

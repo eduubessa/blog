@@ -49,10 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('campaigns')->name('campaigns.')->group(function () {
         Route::get('/', [CampaignViewController::class, 'index'])->name('index');
         Route::post('/', [CampaignApiController::class, 'store'])->name('store');
-        Route::get('/{id}', [CampaignViewController::class, 'show'])->name('show');
-        Route::get('/{id}/edit', [CampaignViewController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [CampaignApiController::class, 'update'])->name('update');
-        Route::delete('/{id}', [CampaignApiController::class, 'destroy'])->name('destroy');
+        Route::get('/{code}', [CampaignViewController::class, 'show'])->name('show');
+        Route::get('/{code}/edit', [CampaignViewController::class, 'edit'])->name('edit');
+        Route::put('/{code}', [CampaignApiController::class, 'update'])->name('update');
+        Route::delete('/{code}', [CampaignApiController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('mails')->name('mails.')->group(function () {
